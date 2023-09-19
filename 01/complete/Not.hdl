@@ -1,0 +1,23 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Not.hdl
+
+/**
+ * Not gate:
+ * out = not in
+ */
+
+CHIP Not {
+    IN in;
+    OUT out;
+
+    PARTS:
+	/*	
+		Idea:
+			Fork input; pass to Nand; it has a built-in Not;
+		Purpose:
+			Generate opposite of input
+	**/
+	Nand(a=in, b=in, out=out); // Nand(a=0, b=0, out=out) -> O and 0 -> 0; Not(0) -> 1
+}

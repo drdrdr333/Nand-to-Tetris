@@ -1,0 +1,28 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or.hdl
+
+ /**
+ * Or gate:
+ * out = 1 if (a == 1 or b == 1)
+ *       0 otherwise
+ */
+
+CHIP Or {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    /*
+		Idea:
+			Use Not on both a,b to get the opposite;
+			Leverage both outputs as inputs to Nand;
+			this flips the Nand truth table for 0,0 & 1,1;
+		Purpose:
+			Logical or - a||b == 1 -> 1 else 0
+	**/
+	Not(in=a, out=nota); // Not(a) -> nota; Not(0) -> 1
+	Not(in=b, out=notb); // same as above, b as input
+	Nand(a=nota, b=notb, out=out); // Nand(nota, notb) -> out; Nand(1,1) -> 0 = Or(0,0)
+}
